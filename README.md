@@ -14,6 +14,7 @@ Instructions to Use
 3) Vary Initial Velocity and Angle to produce a trajectory
 
 Demonstrations
+
 1)Planet Earth
 
 
@@ -38,7 +39,9 @@ Demonstrations
 
 Authors
 Aman Goel - Setup Equations of Projectile
+
 Anveshan Lal - Setup interactive slider
+
 Shreyansh Goel - Major Bug fixes of Code
 
 
