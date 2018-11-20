@@ -2,50 +2,46 @@ Project Title
 Projectile Analysis Through Interactive Simulation
 
 Getting Started
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+1) Install Mathematica 11.3
+2) Open Projectile.nb
 
 Prerequisites
 Wolfram Mathematica 11.3
 
-Give examples
-Installing
-A step by step series of examples that tell you how to get a development env running
+Instructions to Use
+1) Open Projectile.nb
+2) Chose Celestial Body (Earth, Moon or Planet X)
+3) Vary Initial Velocity and Angle to produce a trajectory
 
-Say what the step will be
+Demonstrations
+1)Planet Earth
 
-Give the example
-And repeat
 
-until finished
-End with an example of getting some data out of the system or using it for a little demo
 
-Running the tests
-Explain how to run the automated tests for this system
 
-Break down into end to end tests
-Explain what these tests test and why
 
-Give an example
-And coding style tests
-Explain what these tests test and why
 
-Give an example
-Deployment
-Add additional notes about how to deploy this on a live system
 
-Built With
-Dropwizard - The web framework used
-Maven - Dependency Management
-ROME - Used to generate RSS Feeds
+
+
+2) Moon
+
+
+3) Planet X
+> You can choose the gravitational acceleration and modify the code accordingly. For test case we are using
+
+
+
+
+
 
 
 Authors
-Aman Goel
-Anveshan Lal
-Shreyansh Goel
+Aman Goel - Setup Equations of Projectile
+Anveshan Lal - Setup interactive slider
+Shreyansh Goel - Major Bug fixes of Code
 
-License
-This project is licensed under the MIT License - see the LICENSE.md file for details
 
 Acknowledgments
 Wolfram's Mathematica Documentation
+
