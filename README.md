@@ -15,7 +15,7 @@ Instructions to Use
 
 Demonstrations
 
-1)Planet Earth
+1) Planet Earth
 
 
 
