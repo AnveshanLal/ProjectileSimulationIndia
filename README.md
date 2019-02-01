@@ -37,12 +37,7 @@ Demonstrations
 
 
 
-Authors
-Aman Goel - Setup Equations of Projectile
 
-Anveshan Lal - Setup interactive slider
-
-Shreyansh Goel - Major Bug fixes of Code
 
 
 Acknowledgments
