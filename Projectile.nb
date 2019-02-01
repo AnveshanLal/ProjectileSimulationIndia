@@ -1,0 +1,901 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     38338,        893]
+NotebookOptionsPosition[     37906,        877]
+NotebookOutlinePosition[     38249,        892]
+CellTagsIndexPosition[     38206,        889]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "theta", ",", "x", ",", "y", ",", "r", ",", "range", ",", "tmaxheight",
+         ",", "optlist"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"theta", ":=", 
+        RowBox[{"theta1", " ", "Degree"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"x", "[", "t_", "]"}], ":=", 
+        RowBox[{"t", " ", "v0", " ", 
+         RowBox[{"Cos", "[", "theta", "]"}]}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"y", "[", "t_", "]"}], ":=", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", "1"}], "/", "2"}], " ", "g", " ", 
+          RowBox[{"t", "^", "2"}]}], "+", 
+         RowBox[{"t", " ", "v0", " ", 
+          RowBox[{"Sin", "[", "theta", "]"}]}], "+", "h"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"r", "[", "t_", "]"}], ":=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"x", "[", "t", "]"}], ",", 
+          RowBox[{"y", "[", "t", "]"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"tground", "[", 
+         RowBox[{"theta_", ",", "v0_"}], "]"}], ":=", 
+        RowBox[{"Flatten", "[", 
+         RowBox[{"Solve", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"r", "[", "t", "]"}], "[", 
+             RowBox[{"[", "2", "]"}], "]"}], "\[Equal]", "0"}], ",", "t"}], 
+          "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"range", "[", 
+         RowBox[{"theta_", ",", "v0_"}], "]"}], ":=", 
+        RowBox[{"Max", "[", 
+         RowBox[{"Map", "[", 
+          RowBox[{"x", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"tground", "[", 
+               RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", "2"}], "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"tground", "[", 
+               RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+              RowBox[{"[", 
+               RowBox[{"2", ",", "2"}], "]"}], "]"}]}], "}"}]}], "]"}], 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"tmaxheight", "=", 
+        RowBox[{
+         RowBox[{"Flatten", "[", 
+          RowBox[{"Solve", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"y", "'"}], "[", "t", "]"}], "\[Equal]", "0"}], ",", 
+            "t"}], "]"}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"1", ",", "2"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]",
+        "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"tend", ">", 
+          RowBox[{
+           RowBox[{"tground", "[", 
+            RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"2", ",", "2"}], "]"}], "]"}]}], ",", 
+         RowBox[{"tend", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"tground", "[", 
+             RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+            RowBox[{"[", 
+             RowBox[{"2", ",", "2"}], "]"}], "]"}], "-", ".001"}]}], ",", 
+         RowBox[{"tend", "=", "tend"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"optlist", "=", "someoptions"}], ";", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Deploy", "[", 
+        RowBox[{"Show", "[", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Graphics", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"Red", ",", 
+               RowBox[{"PointSize", "[", "0.01", "]"}], ",", 
+               RowBox[{"Point", "[", 
+                RowBox[{"{", 
+                 RowBox[{"0", ",", "h"}], "}"}], "]"}]}], "}"}], ",", 
+             "\[IndentingNewLine]", "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"MemberQ", "[", 
+                 RowBox[{"someoptions", ",", "showheightrange"}], "]"}], "&&", 
+                RowBox[{"tend", "\[GreaterEqual]", "tmaxheight"}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"Purple", ",", 
+                 RowBox[{"Text", "[", 
+                  RowBox[{
+                   RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"y", "[", "tmaxheight", "]"}], ",", "0.01"}], 
+                    "]"}], "]"}], ",", "\"\< m\>\""}], "}"}], "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"x", "[", "tmaxheight", "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"y", "[", "tmaxheight", "]"}], "+", 
+                    RowBox[{"xmax", "/", "20"}]}]}], "}"}]}], "]"}]}], "}"}], 
+               ",", 
+               RowBox[{"{", "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"MemberQ", "[", 
+                 RowBox[{"someoptions", ",", "showheightrange"}], "]"}], "&&", 
+                RowBox[{"tend", "===", 
+                 RowBox[{
+                  RowBox[{"tground", "[", 
+                   RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+                  RowBox[{"[", 
+                   RowBox[{"2", ",", "2"}], "]"}], "]"}]}]}], ",", 
+               RowBox[{"{", 
+                RowBox[{"Purple", ",", 
+                 RowBox[{"Text", "[", 
+                  RowBox[{
+                   RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{
+                    RowBox[{"range", "[", 
+                    RowBox[{"theta", ",", "v0"}], "]"}], ",", "0.01"}], "]"}],
+                     "]"}], ",", "\"\< m\>\""}], "}"}], "]"}], ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"range", "[", 
+                    RowBox[{"theta", ",", "v0"}], "]"}], "+", 
+                    RowBox[{"xmax", "/", "20"}]}], ",", 
+                    RowBox[{"xmax", "/", "20"}]}], "}"}]}], "]"}]}], "}"}], 
+               ",", 
+               RowBox[{"{", "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"someoptions", ",", "showtheta"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Darker", "[", 
+                    RowBox[{"Green", ",", "0.5"}], "]"}], ",", 
+                   RowBox[{"Dashing", "[", "Small", "]"}], ",", 
+                   RowBox[{"Line", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "h"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xmax", "/", "5"}], ",", "h"}], "}"}]}], "}"}], 
+                    "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Darker", "[", 
+                    RowBox[{"Green", ",", "0.5"}], "]"}], ",", 
+                   RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"Round", "[", 
+                    RowBox[{"theta1", ",", "0.01"}], "]"}], "]"}], ",", 
+                    "\"\<\[Degree]\>\""}], "}"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xmax", "/", "10"}], ",", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"theta1", "<", "0"}], ",", 
+                    RowBox[{"h", "-", 
+                    RowBox[{"xmax", "/", "40"}]}], ",", 
+                    RowBox[{"h", "+", 
+                    RowBox[{"xmax", "/", "40"}]}]}], "]"}]}], "}"}]}], 
+                    "]"}]}], "}"}]}], "}"}], ",", 
+               RowBox[{"{", "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"someoptions", ",", "showg"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Darker", "[", 
+                    RowBox[{"Red", ",", "0.5"}], "]"}], ",", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"xmax", ",", 
+                    RowBox[{"xmax", "/", "2"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"xmax", ",", 
+                    RowBox[{"0.75", 
+                    RowBox[{"(", 
+                    RowBox[{"xmax", "/", "2"}], ")"}]}]}], "}"}]}], "}"}], 
+                    "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Darker", "[", 
+                    RowBox[{"Red", ",", "0.5"}], "]"}], ",", 
+                   RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", "g", "]"}], ",", "\"\< m/\>\"", 
+                    ",", 
+                    RowBox[{"TraditionalForm", "[", 
+                    RowBox[{"\"\<s\>\"", "^", "2"}], "]"}]}], "}"}], "]"}], 
+                    ",", 
+                    RowBox[{"{", 
+                    RowBox[{"xmax", ",", 
+                    RowBox[{"0.7", 
+                    RowBox[{"(", 
+                    RowBox[{"xmax", "/", "2"}], ")"}]}]}], "}"}]}], "]"}]}], 
+                  "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Darker", "[", 
+                    RowBox[{"Red", ",", "0.5"}], "]"}], ",", 
+                   RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Style", "[", 
+                    RowBox[{"\"\<g\>\"", ",", "\"\<Label\>\""}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xmax", "-", 
+                    RowBox[{"xmax", "/", "30"}]}], ",", 
+                    RowBox[{"0.9", 
+                    RowBox[{"(", 
+                    RowBox[{"xmax", "/", "2"}], ")"}]}]}], "}"}]}], "]"}]}], 
+                  "}"}]}], "}"}], ",", 
+               RowBox[{"{", "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+             "\[IndentingNewLine]", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"MemberQ", "[", 
+                RowBox[{"someoptions", ",", "scalev0"}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{"Blue", ",", 
+                   RowBox[{"Text", "[", 
+                    RowBox[{
+                    RowBox[{"Row", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"ToString", "[", "v0", "]"}], ",", 
+                    "\"\< m/s\>\""}], "}"}], "]"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xmax", " ", 
+                    RowBox[{
+                    RowBox[{"Cos", "[", "theta", "]"}], "/", "5.75"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"xmax", " ", 
+                    RowBox[{
+                    RowBox[{"Sin", "[", "theta", "]"}], "/", "5.75"}]}], "+", 
+                    "h"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"Blue", ",", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"0", "+", "h"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"xmax", " ", 
+                    RowBox[{
+                    RowBox[{"Cos", "[", "theta", "]"}], "/", "9"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"xmax", " ", 
+                    RowBox[{
+                    RowBox[{"Sin", "[", "theta", "]"}], "/", "9"}]}], "+", 
+                    "h"}]}], "}"}]}], "}"}], "]"}]}], "}"}]}], "}"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"{", 
+                RowBox[{"Blue", ",", 
+                 RowBox[{"Arrow", "[", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", 
+                    RowBox[{"0", "+", "h"}]}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"v0", " ", 
+                    RowBox[{"Cos", "[", "theta", "]"}]}], ",", 
+                    RowBox[{
+                    RowBox[{"v0", " ", 
+                    RowBox[{"Sin", "[", "theta", "]"}]}], "+", "h"}]}], 
+                    "}"}]}], "}"}], "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+              "]"}]}], "\[IndentingNewLine]", "}"}], "]"}], ",", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"ParametricPlot", "[", 
+           RowBox[{
+            RowBox[{"r", "[", "t", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", "0.00001", ",", "tend"}], "}"}], ",", 
+            RowBox[{"PlotStyle", "\[Rule]", 
+             RowBox[{"Darker", "[", 
+              RowBox[{"Purple", ",", ".5"}], "]"}]}], ",", 
+            RowBox[{"MaxRecursion", "\[Rule]", "1"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"ParametricPlot", "[", 
+           RowBox[{
+            RowBox[{"r", "[", "t", "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", "tend", ",", 
+              RowBox[{
+               RowBox[{"tground", "[", 
+                RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "2"}], "]"}], "]"}]}], "}"}], ",", 
+            RowBox[{"PlotStyle", "\[Rule]", 
+             RowBox[{"Lighter", "[", 
+              RowBox[{"Purple", ",", ".8"}], "]"}]}], ",", 
+            RowBox[{"MaxRecursion", "\[Rule]", "1"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", "\[IndentingNewLine]", 
+          RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+          RowBox[{"ImageSize", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"400", ",", "Automatic"}], "}"}]}], ",", 
+          RowBox[{"AxesOrigin", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "0"}], "}"}]}], ",", 
+          RowBox[{"AxesLabel", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"\"\<x (m)\>\"", ",", "\"\<y (m)\>\""}], "}"}]}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", "xmax"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"xmax", "/", "2"}]}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"PlotRangePadding", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"xmax", "/", "15"}]}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", 
+               RowBox[{"xmax", "/", "30"}]}], "}"}]}], "}"}]}], ",", 
+          RowBox[{"ImagePadding", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"20", ",", "30"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"20", ",", "20"}], "}"}]}], "}"}]}]}], "]"}], "]"}]}]}],
+      "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"h", ",", "3.5"}], "}"}], ",", "0", ",", "7", ",", 
+      RowBox[{"ControlType", "\[Rule]", "VerticalSlider"}], ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Left"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"g", ",", "9.81"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"9.81", "\[Rule]", "\"\<Earth\>\""}], ",", 
+        RowBox[{"1.62", "\[Rule]", "\"\<Moon\>\""}], ",", 
+        RowBox[{"6.70", " ", "\[Rule]", " ", "\"\<Planet X\>\""}]}], "}"}], 
+      ",", 
+      RowBox[{"ControlType", "\[Rule]", "SetterBar"}], ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"v0", ",", "1", ",", 
+        RowBox[{"Subscript", "[", 
+         RowBox[{"\"\<v\>\"", ",", "0"}], "]"}]}], "}"}], ",", "0", ",", "10",
+       ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"theta1", ",", "0", ",", 
+        RowBox[{"Style", "[", 
+         RowBox[{"\"\<\[Theta]\>\"", ",", "14"}], "]"}]}], "}"}], ",", 
+      RowBox[{"-", "90"}], ",", "90", ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"tend", ",", "0.0000001", ",", "\"\<t\>\""}], "}"}], ",", 
+      "0.0000001", ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"tground", "[", 
+         RowBox[{"theta", ",", "v0"}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"2", ",", "2"}], "]"}], "]"}], "-", ".001"}], ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"someoptions", ",", 
+        RowBox[{"{", "}"}], ",", "\"\<\>\""}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"scalev0", "\[Rule]", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Subscript", "[", 
+             RowBox[{"\"\<v\>\"", ",", "0"}], "]"}], ",", 
+            "\"\< scaled  \>\""}], "}"}], "]"}]}], ",", 
+        RowBox[{"showheightrange", "\[Rule]", "\"\<height and range  \>\""}], 
+        ",", 
+        RowBox[{"showtheta", "\[Rule]", "\"\<show \[Theta]  \>\""}], ",", 
+        RowBox[{
+        "showg", "\[Rule]", "\"\<acceleration due to gravity g  \>\""}]}], 
+       "}"}], ",", 
+      RowBox[{"ControlType", "\[Rule]", "CheckboxBar"}], ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Top"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"xmax", ",", "15", ",", "\"\<maximum x\>\""}], "}"}], ",", 
+      "15", ",", "300", ",", 
+      RowBox[{"ControlPlacement", "\[Rule]", "Bottom"}], ",", 
+      RowBox[{"ImageSize", "\[Rule]", "Tiny"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
+     RowBox[{"{", 
+      RowBox[{
+      "tend", ",", "theta1", ",", "v0", ",", "h", ",", "g", ",", "xmax", ",", 
+       "someoptions"}], "}"}]}], ",", 
+    RowBox[{"ControlPlacement", "\[Rule]", "Left"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<\>\"", ",", "\"\<\>\"", ",", 
+       RowBox[{"Text", "@", 
+        RowBox[{"Style", "[", 
+         RowBox[{
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"ToString", "[", 
+              RowBox[{
+               RowBox[{"HoldForm", "[", 
+                RowBox[{"x", "[", "t", "]"}], "]"}], ",", "TraditionalForm"}],
+               "]"}], ",", "\"\< = \>\"", ",", 
+             RowBox[{"ToString", "[", 
+              RowBox[{
+               RowBox[{"HoldForm", "[", "t", "]"}], ",", "TraditionalForm"}], 
+              "]"}], " ", ",", 
+             RowBox[{"ToString", "[", 
+              RowBox[{
+               RowBox[{"Subscript", "[", 
+                RowBox[{
+                 RowBox[{"Style", "[", 
+                  RowBox[{"\"\< v\>\"", ",", "Italic"}], "]"}], ",", "0"}], 
+                "]"}], ",", "TraditionalForm"}], "]"}], ",", 
+             "\"\< cos(\[Theta]),   \>\"", ",", 
+             RowBox[{"ToString", "[", 
+              RowBox[{
+               RowBox[{"HoldForm", "[", 
+                RowBox[{"y", "[", "t", "]"}], "]"}], ",", "TraditionalForm"}],
+               "]"}], ",", "\"\< = \>\"", ",", 
+             RowBox[{
+              RowBox[{"-", "1"}], "/", "2"}], ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\< g \>\"", ",", "Italic"}], "]"}], ",", 
+             RowBox[{"Superscript", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<t\>\"", ",", "Italic"}], "]"}], ",", "2"}], 
+              "]"}], ",", "\"\< + \>\"", ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<t \>\"", ",", "Italic"}], "]"}], ",", 
+             RowBox[{"Subscript", "[", 
+              RowBox[{
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<v\>\"", ",", "Italic"}], "]"}], ",", "0"}], 
+              "]"}], ",", "\"\< sin(\[Theta]) + \>\"", ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<h\>\"", ",", "Italic"}], "]"}]}], "}"}], "]"}], 
+          ",", "14"}], "]"}]}], ",", "\"\<\>\""}], "}"}]}], ",", 
+    RowBox[{"Initialization", "\[RuleDelayed]", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"tground", "[", 
+        RowBox[{"x_", ",", "y_"}], "]"}], ":=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"100", ",", "100"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"100", ",", "100"}], "}"}]}], "}"}]}], "}"}]}], ",", 
+    RowBox[{"AutorunSequencing", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}]}], ",", 
+    RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+   "]"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{
+  3.751613180083163*^9, {3.7516133658206873`*^9, 3.7516134089200583`*^9}, {
+   3.7516788203514385`*^9, 3.7516788640414925`*^9}, {3.7516942484738817`*^9, 
+   3.7516942528950567`*^9}},
+ CellLabel->"In[2]:=",ExpressionUUID->"73078ab4-d0f1-43e0-b733-b7ce132f63fc"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`g$$ = 6.7, $CellContext`h$$ = 
+    0., $CellContext`someoptions$$ = {}, $CellContext`tend$$ = 
+    2.167879614838734, $CellContext`theta1$$ = 
+    46.599999999999994`, $CellContext`v0$$ = 10., $CellContext`xmax$$ = 15, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`h$$], 3.5}, 0, 7}, {{
+       Hold[$CellContext`g$$], 9.81}, {
+      9.81 -> "Earth", 1.62 -> "Moon", 6.7 -> "Planet X"}}, {{
+       Hold[$CellContext`v0$$], 1, 
+       Subscript["v", 0]}, 0, 10}, {{
+       Hold[$CellContext`theta1$$], 0, 
+       Style["\[Theta]", 14]}, -90, 90}, {{
+       Hold[$CellContext`tend$$], 1.*^-7, "t"}, 1.*^-7, 
+      Dynamic[Part[
+         $CellContext`tground[$CellContext`theta, $CellContext`v0$$], 2, 2] - 
+       0.001]}, {{
+       Hold[$CellContext`someoptions$$], {}, ""}, {$CellContext`scalev0 -> 
+       Row[{
+          Subscript["v", 0], " scaled  "}], $CellContext`showheightrange -> 
+       "height and range  ", $CellContext`showtheta -> 
+       "show \[Theta]  ", $CellContext`showg -> 
+       "acceleration due to gravity g  "}}, {{
+       Hold[$CellContext`xmax$$], 15, "maximum x"}, 15, 300}}, 
+    Typeset`size$$ = {400., {105., 110.}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    False, $CellContext`h$35026$$ = 0, $CellContext`g$35027$$ = 
+    False, $CellContext`v0$35028$$ = 0, $CellContext`theta1$35029$$ = 
+    0, $CellContext`tend$35030$$ = 0, $CellContext`someoptions$35031$$ = 
+    False, $CellContext`xmax$35032$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`g$$ = 9.81, $CellContext`h$$ = 
+        3.5, $CellContext`someoptions$$ = {}, $CellContext`tend$$ = 
+        1.*^-7, $CellContext`theta1$$ = 0, $CellContext`v0$$ = 
+        1, $CellContext`xmax$$ = 15}, "ControllerVariables" :> {
+        Hold[$CellContext`h$$, $CellContext`h$35026$$, 0], 
+        Hold[$CellContext`g$$, $CellContext`g$35027$$, False], 
+        Hold[$CellContext`v0$$, $CellContext`v0$35028$$, 0], 
+        Hold[$CellContext`theta1$$, $CellContext`theta1$35029$$, 0], 
+        Hold[$CellContext`tend$$, $CellContext`tend$35030$$, 0], 
+        Hold[$CellContext`someoptions$$, $CellContext`someoptions$35031$$, 
+         False], 
+        Hold[$CellContext`xmax$$, $CellContext`xmax$35032$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Module[{$CellContext`theta$, $CellContext`x$, $CellContext`y$, \
+$CellContext`r$, $CellContext`range$, $CellContext`tmaxheight$, \
+$CellContext`optlist$}, $CellContext`theta$ := $CellContext`theta1$$ 
+          Degree; $CellContext`x$[
+           Pattern[$CellContext`t$, 
+            Blank[]]] := $CellContext`t$ $CellContext`v0$$ 
+          Cos[$CellContext`theta$]; $CellContext`y$[
+           Pattern[$CellContext`t$, 
+            Blank[]]] := ((-1)/
+            2) $CellContext`g$$ $CellContext`t$^2 + $CellContext`t$ \
+$CellContext`v0$$ Sin[$CellContext`theta$] + $CellContext`h$$; $CellContext`r$[
+           Pattern[$CellContext`t$, 
+            Blank[]]] := {
+           $CellContext`x$[$CellContext`t$], 
+           $CellContext`y$[$CellContext`t$]}; $CellContext`tground[
+           Pattern[$CellContext`theta$, 
+            Blank[]], 
+           Pattern[$CellContext`v0$, 
+            Blank[]]] := Flatten[
+           Solve[Part[
+              $CellContext`r$[$CellContext`t], 2] == 
+            0, $CellContext`t]]; $CellContext`range$[
+           Pattern[$CellContext`theta$, 
+            Blank[]], 
+           Pattern[$CellContext`v0$, 
+            Blank[]]] := Max[
+           Map[$CellContext`x$, {
+             Part[
+              $CellContext`tground[$CellContext`theta$, $CellContext`v0$], 1, 
+              2], 
+             Part[
+              $CellContext`tground[$CellContext`theta$, $CellContext`v0$], 2, 
+              2]}]]; $CellContext`tmaxheight$ = Part[
+           Flatten[
+            Solve[
+            Derivative[1][$CellContext`y$][$CellContext`t] == 
+             0, $CellContext`t]], 1, 2]; If[$CellContext`tend$$ > Part[
+            $CellContext`tground[$CellContext`theta$, $CellContext`v0$$], 2, 
+            2], $CellContext`tend$$ = Part[
+             $CellContext`tground[$CellContext`theta$, $CellContext`v0$$], 2, 
+             2] - 0.001, $CellContext`tend$$ = $CellContext`tend$$]; \
+$CellContext`optlist$ = $CellContext`someoptions$$; Deploy[
+          Show[
+           Graphics[{{Red, 
+              PointSize[0.01], 
+              Point[{0, $CellContext`h$$}]}, 
+             If[
+              And[
+               
+               MemberQ[$CellContext`someoptions$$, \
+$CellContext`showheightrange], $CellContext`tend$$ >= \
+$CellContext`tmaxheight$], {Purple, 
+               Text[
+                Row[{
+                  ToString[
+                   Round[
+                    $CellContext`y$[$CellContext`tmaxheight$], 0.01]], 
+                  " m"}], {
+                 $CellContext`x$[$CellContext`tmaxheight$], \
+$CellContext`y$[$CellContext`tmaxheight$] + $CellContext`xmax$$/20}]}, {}], 
+             If[
+              And[
+               
+               MemberQ[$CellContext`someoptions$$, \
+$CellContext`showheightrange], $CellContext`tend$$ === Part[
+                 $CellContext`tground[$CellContext`theta$, $CellContext`v0$$],
+                  2, 2]], {Purple, 
+               Text[
+                Row[{
+                  ToString[
+                   Round[
+                    $CellContext`range$[$CellContext`theta$, \
+$CellContext`v0$$], 0.01]], 
+                  
+                  " m"}], {$CellContext`range$[$CellContext`theta$, \
+$CellContext`v0$$] + $CellContext`xmax$$/20, $CellContext`xmax$$/20}]}, {}], 
+             If[
+              MemberQ[$CellContext`someoptions$$, $CellContext`showtheta], {{
+                Darker[Green, 0.5], 
+                Dashing[Small], 
+                
+                Line[{{0, $CellContext`h$$}, {$CellContext`xmax$$/
+                   5, $CellContext`h$$}}]}, {
+                Darker[Green, 0.5], 
+                Text[
+                 Row[{
+                   ToString[
+                    Round[$CellContext`theta1$$, 0.01]], 
+                   "\[Degree]"}], {$CellContext`xmax$$/10, 
+                  
+                  If[$CellContext`theta1$$ < 
+                   0, $CellContext`h$$ - $CellContext`xmax$$/
+                   40, $CellContext`h$$ + $CellContext`xmax$$/40]}]}}, {}], 
+             If[
+              MemberQ[$CellContext`someoptions$$, $CellContext`showg], {{
+                Darker[Red, 0.5], 
+                
+                Arrow[{{$CellContext`xmax$$, $CellContext`xmax$$/
+                   2}, {$CellContext`xmax$$, 
+                   0.75 ($CellContext`xmax$$/2)}}]}, {
+                Darker[Red, 0.5], 
+                Text[
+                 Row[{
+                   ToString[$CellContext`g$$], " m/", 
+                   TraditionalForm["s"^2]}], {$CellContext`xmax$$, 
+                  0.7 ($CellContext`xmax$$/2)}]}, {
+                Darker[Red, 0.5], 
+                Text[
+                 Style[
+                 "g", "Label"], {$CellContext`xmax$$ - $CellContext`xmax$$/30,
+                   0.9 ($CellContext`xmax$$/2)}]}}, {}], 
+             If[
+              
+              MemberQ[$CellContext`someoptions$$, $CellContext`scalev0], {{
+               Blue, 
+                Text[
+                 Row[{
+                   ToString[$CellContext`v0$$], 
+                   " m/s"}], {$CellContext`xmax$$ (Cos[$CellContext`theta$]/
+                   5.75), $CellContext`xmax$$ (Sin[$CellContext`theta$]/
+                    5.75) + $CellContext`h$$}]}, {Blue, 
+                
+                Arrow[{{
+                  0, 0 + $CellContext`h$$}, {$CellContext`xmax$$ (
+                    Cos[$CellContext`theta$]/
+                    9), $CellContext`xmax$$ (Sin[$CellContext`theta$]/
+                    9) + $CellContext`h$$}}]}}, {Blue, 
+               
+               Arrow[{{
+                 0, 0 + $CellContext`h$$}, {$CellContext`v0$$ 
+                  Cos[$CellContext`theta$], $CellContext`v0$$ 
+                   Sin[$CellContext`theta$] + $CellContext`h$$}}]}]}], 
+           ParametricPlot[
+            $CellContext`r$[$CellContext`t], {$CellContext`t, 
+             0.00001, $CellContext`tend$$}, PlotStyle -> Darker[Purple, 0.5], 
+            MaxRecursion -> 1], 
+           ParametricPlot[
+            $CellContext`r$[$CellContext`t], {$CellContext`t, \
+$CellContext`tend$$, 
+             Part[
+              $CellContext`tground[$CellContext`theta$, $CellContext`v0$$], 2,
+               2]}, PlotStyle -> Lighter[Purple, 0.8], MaxRecursion -> 1], 
+           Axes -> True, ImageSize -> {400, Automatic}, AxesOrigin -> {0, 0}, 
+           AxesLabel -> {"x (m)", "y (m)"}, 
+           PlotRange -> {{0, $CellContext`xmax$$}, {
+             0, $CellContext`xmax$$/2}}, 
+           PlotRangePadding -> {{0, $CellContext`xmax$$/15}, {
+             0, $CellContext`xmax$$/30}}, 
+           ImagePadding -> {{20, 30}, {20, 20}}]]], 
+      "Specifications" :> {{{$CellContext`h$$, 3.5}, 0, 7, ControlType -> 
+         VerticalSlider, ControlPlacement -> 
+         Left}, {{$CellContext`g$$, 9.81}, {
+         9.81 -> "Earth", 1.62 -> "Moon", 6.7 -> "Planet X"}, ControlType -> 
+         SetterBar, ControlPlacement -> Top}, {{$CellContext`v0$$, 1, 
+          Subscript["v", 0]}, 0, 10, ControlPlacement -> 
+         Top}, {{$CellContext`theta1$$, 0, 
+          Style["\[Theta]", 14]}, -90, 90, ControlPlacement -> 
+         Top}, {{$CellContext`tend$$, 1.*^-7, "t"}, 1.*^-7, 
+         Dynamic[Part[
+            $CellContext`tground[$CellContext`theta, $CellContext`v0$$], 2, 
+            2] - 0.001], ControlPlacement -> 
+         Top}, {{$CellContext`someoptions$$, {}, ""}, {$CellContext`scalev0 -> 
+          Row[{
+             Subscript["v", 0], " scaled  "}], $CellContext`showheightrange -> 
+          "height and range  ", $CellContext`showtheta -> 
+          "show \[Theta]  ", $CellContext`showg -> 
+          "acceleration due to gravity g  "}, ControlType -> CheckboxBar, 
+         ControlPlacement -> Top}, {{$CellContext`xmax$$, 15, "maximum x"}, 
+         15, 300, ControlPlacement -> Bottom, ImageSize -> Tiny}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`tend$$, $CellContext`theta1$$, \
+$CellContext`v0$$, $CellContext`h$$, $CellContext`g$$, $CellContext`xmax$$, \
+$CellContext`someoptions$$}, ControlPlacement -> Left, FrameLabel -> {"", "", 
+          Text[
+           Style[
+            
+            Row[{"\!\(\*FormBox[TagBox[RowBox[{\"x\", \"(\", \"t\", \")\"}], \
+HoldForm], TraditionalForm]\)", " = ", 
+              "\!\(\*FormBox[TagBox[\"t\", HoldForm], TraditionalForm]\)", 
+              "\!\(\*FormBox[SubscriptBox[StyleBox[\"\\\" v\\\"\", Italic, \
+Rule[StripOnInput, False]], \"0\"], TraditionalForm]\)", " cos(\[Theta]),   ",
+               "\!\(\*FormBox[TagBox[RowBox[{\"y\", \"(\", \"t\", \")\"}], \
+HoldForm], TraditionalForm]\)", " = ", 
+              Rational[-1, 2], 
+              Style[" g ", Italic], 
+              Superscript[
+               Style["t", Italic], 2], " + ", 
+              Style["t ", Italic], 
+              Subscript[
+               Style["v", Italic], 0], " sin(\[Theta]) + ", 
+              Style["h", Italic]}], 14]], ""}, 
+        AutorunSequencing -> {1, 2, 3, 4, 5}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{509., {238., 244.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({{$CellContext`tground[
+           Pattern[$CellContext`theta$, 
+            Blank[]], 
+           Pattern[$CellContext`v0$, 
+            Blank[]]] := Flatten[
+           Solve[Part[
+              $CellContext`r$34926[$CellContext`t], 2] == 0, $CellContext`t]],
+          Attributes[$CellContext`theta$] = {Temporary}, 
+         Attributes[$CellContext`v0$] = {Temporary}, 
+         Attributes[$CellContext`r$34926] = {Temporary}, $CellContext`r$34926[
+           Pattern[$CellContext`t$, 
+            Blank[]]] := {
+           $CellContext`x$34926[$CellContext`t$], 
+           $CellContext`y$34926[$CellContext`t$]}, 
+         Attributes[$CellContext`t$] = {Temporary}, 
+         Attributes[$CellContext`x$34926] = {Temporary}, $CellContext`x$34926[
+           Pattern[$CellContext`t$, 
+            Blank[]]] := $CellContext`t$ FE`v0$$62 
+          Cos[$CellContext`theta$34926], FE`v0$$62 = 4.88, 
+         Attributes[$CellContext`theta$34926] = {
+          Temporary}, $CellContext`theta$34926 := FE`theta1$$62 Degree, 
+         FE`theta1$$62 = 59., 
+         Attributes[$CellContext`y$34926] = {Temporary}, $CellContext`y$34926[
+           Pattern[$CellContext`t$, 
+            Blank[]]] := ((-1)/2) 
+           FE`g$$62 $CellContext`t$^2 + $CellContext`t$ FE`v0$$62 
+           Sin[$CellContext`theta$34926] + FE`h$$62, FE`g$$62 = 1.62, 
+         FE`h$$62 = 0., Attributes[Derivative] = {NHoldAll, ReadProtected}, 
+         Attributes[Subscript] = {NHoldRest}}; {$CellContext`tground[
+           Pattern[$CellContext`x, 
+            Blank[]], 
+           Pattern[$CellContext`y, 
+            Blank[]]] := {{100, 100}, {100, 100}}}}; 
+     Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.751613182614643*^9, {3.7516133896522837`*^9, 3.7516134132329473`*^9}, 
+   3.751678870020492*^9, {3.751692780323296*^9, 3.751692800008215*^9}, {
+   3.751693872722312*^9, 3.7516938892301044`*^9}, 3.75169425845813*^9},
+ CellLabel->"Out[2]=",ExpressionUUID->"4f9a163d-57b9-4a84-8811-ccca97d4f9ca"]
+}, Open  ]]
+},
+WindowSize->{1536, 781},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 23080, 556, 1188, "Input",ExpressionUUID->"73078ab4-d0f1-43e0-b733-b7ce132f63fc"],
+Cell[23663, 580, 14227, 294, 501, "Output",ExpressionUUID->"4f9a163d-57b9-4a84-8811-ccca97d4f9ca"]
+}, Open  ]]
+}
+]
+*)
+
